@@ -1,0 +1,23 @@
+﻿<Window x:Class="JulioCode03.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:local="clr-namespace:JulioCode.Views"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800">
+    <!--xmlns:ViewModels="clr-namespace:JulioCode06.ViewModels;assembly=JulioCode06.ViewModels"-->
+    <!--DataContext="{Binding ViewModels.MainViewModel}"-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="167*"/>
+            <RowDefinition Height="22*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Load Trades" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+        <!--<DataGrid Grid.Row="1" AutoGenerateColumns="True" ItemsSource="{Binding TradesList}" />-->
+
+    </Grid>
+</Window>
