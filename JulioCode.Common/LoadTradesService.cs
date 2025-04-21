@@ -11,10 +11,10 @@ public class LoadTradesService {
 
         await Task.Delay(1500);
         var tradeList = new List<Trade> {
-        new Trade("TSLA", "future trade", "Dollar", 200d, new DateTime(2026, 01, 01))
-        , new Trade("NVDA", "future trade", "Dollar", 200d, new DateTime(2026, 01, 01))
-        , new Trade("TSLA", "future trade", "Real", 200d, new DateTime(2026, 01, 01))
-        , new Trade("NVDA", "future trade", "Real", 200d, new DateTime(2026, 01, 01))
+        new Trade("TSLA123", "Stocks", "Dollar", 200d, new DateTime(2026, 01, 01))
+        , new Trade("NVDA123", "Stocks", "Dollar", 200d, new DateTime(2026, 01, 01))
+        , new Trade("TSLA234", "Stocks", "Real", 200d, new DateTime(2026, 01, 01))
+        , new Trade("NVDA234", "Stocks", "Real", 200d, new DateTime(2026, 01, 01))
 
         };
         return tradeList;

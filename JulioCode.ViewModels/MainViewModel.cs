@@ -36,15 +36,15 @@ public class MainViewModel : SetPropertyBase {
     #endregion TradesList
 
     #region CurrencyListFilter
-    private List<string> _currencyListFilter;
+    private List<string>? _currencyListFilter = new List<string>();
     public List<string> CurrencyListFilter {
-        get => _currencyListFilter;
+        get => _currencyListFilter!;
         set => SetProperty(ref _currencyListFilter, value);
     }
     #region SelectedFilter
-    private List<string> _selectedFilter;
+    private List<string>? _selectedFilter = new List<string>();
     public List<string> SelectedFilter {
-        get => _selectedFilter;
+        get => _selectedFilter!;
         set => SetProperty(ref _selectedFilter, value);
     }
     #endregion SelectedFilter
@@ -61,6 +61,7 @@ public class MainViewModel : SetPropertyBase {
             case nameof(TradesList):
                 TradesView = TradesList;
                 CurrencyListFilter = TradesList.GroupBy(t => t.Currency).Select(g => g.Key).ToList();
+
                 break;
             case nameof(TradesView):
                 break;

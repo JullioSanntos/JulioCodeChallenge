@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:JulioCode01.Views"
         xmlns:viewModels="clr-namespace:JulioCode06.ViewModels;assembly=JulioCode06.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="450" Width="800">
-    <!--<Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -17,8 +15,16 @@
             <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
         <Button Content="Load trades" Command="{Binding LoadTradeCommand}" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Center"/>
-        <ComboBox Grid.Row="0" Text="Currency filter" HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" DisplayMemberPath="."/>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding TradesView}" />
+        <ComboBox Grid.Row="0" Text="Currency filter" ItemsSource="{Binding CurrencyListFilter}" HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" DisplayMemberPath="."/>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding TradesView}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="TradeId" Binding="{Binding TradeId}" MinWidth="100" Width="auto"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100" Width="auto"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Currency}" MinWidth="100" Width="auto" />
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" MinWidth="100" Width="auto"  />
+                <DataGridTextColumn Header="Maturity Date" Binding="{Binding MaturityDate, StringFormat={}{0:yyyy-mm-dd}}" MinWidth="100" Width="auto"  />
+            </DataGrid.Columns>
+        </DataGrid>
         <TextBlock Grid.Row="1" Text="Is Busy" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding BusyIndicatorVisibility}" />
     </Grid>
 </Window>
