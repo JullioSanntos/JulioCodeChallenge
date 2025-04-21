@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JulioCode.Common\JulioCode12.Common.csproj" />
+    <ProjectReference Include="..\JulioCode.Models\JulioCode09.Models.csproj" />
+    <ProjectReference Include="..\JulioCode.ViewModels\JulioCode06.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
