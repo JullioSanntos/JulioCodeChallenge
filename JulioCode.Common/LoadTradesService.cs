@@ -9,7 +9,7 @@ namespace JulioCode12.Common;
 public class LoadTradesService {
     public async Task<List<Trade>> GetTradesAsync() {
 
-        await Task.Delay(1500);
+        await Task.Delay(1);
         var tradeList = new List<Trade> {
         new Trade("TSLA123", "Stocks", "Dollar", 200d, new DateTime(2026, 01, 01))
         , new Trade("NVDA123", "Stocks", "Dollar", 200d, new DateTime(2026, 01, 01))
