@@ -4,16 +4,18 @@ using JulioCode12.Common;
 using JulioCode12.Common.WPF;
 
 namespace JulioCode06.ViewModels; 
-public class MainViewModel : SetPropertyBase  {
+public class MainViewModel(LoadTradesService loadTradesService) : SetPropertyBase {
     public ICommand LoadTradeCommand => new RelayCommand(async _ => await LoadTrades());
 
-    public LoadTradesService LoadTradesService { get; init; } = new LoadTradesService();
+    public LoadTradesService LoadTradesService { get; init; } = loadTradesService;
 
-    public MainViewModel(LoadTradesService loadTradesService) {
-        LoadTradesService = loadTradesService;
+    #region BusyIndicatorVisibility
+    private string _busyIndicatorVisibility = "Collapsed";
+    public string BusyIndicatorVisibility {
+        get => _busyIndicatorVisibility;
+        set => SetProperty(ref _busyIndicatorVisibility, value);
     }
-
-    //public MainViewModel() { }
+    #endregion BusyIndicatorVisibility
 
     #region TradesList
     private List<Trade>? _tradesList;
@@ -24,7 +26,10 @@ public class MainViewModel : SetPropertyBase  {
     #endregion TradesList
 
     public async Task LoadTrades() {
+        BusyIndicatorVisibility = "Visible";
         TradesList = await LoadTradesService.GetTradesAsync();
+        BusyIndicatorVisibility = "Collapsed";
+
         return;
     }
 }
