@@ -8,14 +8,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JulioCode06.ViewModels;
 
 namespace JulioCode01.Views {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        public MainWindow() {
+
+        public MainViewModel ViewModel { get; internal set; }
+        public MainWindow(MainViewModel viewModel) {
             InitializeComponent();
+            ViewModel = viewModel;
+            this.DataContext = viewModel;
         }
     }
 }

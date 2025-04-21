@@ -7,6 +7,14 @@ namespace JulioCode06.ViewModels;
 public class MainViewModel : SetPropertyBase  {
     public ICommand LoadTradeCommand => new RelayCommand(async _ => await LoadTrades());
 
+    public LoadTradesService LoadTradesService { get; init; } = new LoadTradesService();
+
+    public MainViewModel(LoadTradesService loadTradesService) {
+        LoadTradesService = loadTradesService;
+    }
+
+    //public MainViewModel() { }
+
     #region TradesList
     private List<Trade>? _tradesList;
     public List<Trade> TradesList {
@@ -16,8 +24,7 @@ public class MainViewModel : SetPropertyBase  {
     #endregion TradesList
 
     public async Task LoadTrades() {
-        var loadServices = new LoadTradesService();
-        TradesList = await loadServices.GetTradesAsync();
+        TradesList = await LoadTradesService.GetTradesAsync();
         return;
     }
 }
