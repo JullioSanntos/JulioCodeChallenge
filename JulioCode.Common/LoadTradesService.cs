@@ -13,6 +13,8 @@ public class LoadTradesService {
         var tradeList = new List<Trade> {
         new Trade("TSLA", "future trade", "Dollar", 200d, new DateTime(2026, 01, 01))
         , new Trade("NVDA", "future trade", "Dollar", 200d, new DateTime(2026, 01, 01))
+        , new Trade("TSLA", "future trade", "Real", 200d, new DateTime(2026, 01, 01))
+        , new Trade("NVDA", "future trade", "Real", 200d, new DateTime(2026, 01, 01))
 
         };
         return tradeList;

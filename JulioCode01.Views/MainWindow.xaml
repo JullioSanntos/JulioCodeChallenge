@@ -12,12 +12,13 @@
     </Window.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="152*"/>
-            <RowDefinition Height="33*"/>
+            <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
         <Button Content="Load trades" Command="{Binding LoadTradeCommand}" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Center"/>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding TradesList}" />
+        <ComboBox Grid.Row="0" Text="Currency filter" HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" DisplayMemberPath="."/>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding TradesView}" />
         <TextBlock Grid.Row="1" Text="Is Busy" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding BusyIndicatorVisibility}" />
     </Grid>
 </Window>

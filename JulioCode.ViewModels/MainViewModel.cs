@@ -1,13 +1,14 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using System.Windows.Input;
 using JulioCode12.Common;
 using JulioCode12.Common.WPF;
 
 namespace JulioCode06.ViewModels; 
-public class MainViewModel(LoadTradesService loadTradesService) : SetPropertyBase {
+public class MainViewModel : SetPropertyBase {
     public ICommand LoadTradeCommand => new RelayCommand(async _ => await LoadTrades());
 
-    public LoadTradesService LoadTradesService { get; init; } = loadTradesService;
+    public LoadTradesService LoadTradesService { get; init; }
 
     #region BusyIndicatorVisibility
     private string _busyIndicatorVisibility = "Collapsed";
@@ -24,6 +25,48 @@ public class MainViewModel(LoadTradesService loadTradesService) : SetPropertyBas
         set => SetProperty(ref _tradesList, value);
     }
     #endregion TradesList
+
+    #region TradesList
+    private List<Trade>? _tradesView;
+
+    public List<Trade> TradesView {
+        get { return _tradesView ??= []; }
+        set => SetProperty(ref _tradesView, value);
+    }
+    #endregion TradesList
+
+    #region CurrencyListFilter
+    private List<string> _currencyListFilter;
+    public List<string> CurrencyListFilter {
+        get => _currencyListFilter;
+        set => SetProperty(ref _currencyListFilter, value);
+    }
+    #region SelectedFilter
+    private List<string> _selectedFilter;
+    public List<string> SelectedFilter {
+        get => _selectedFilter;
+        set => SetProperty(ref _selectedFilter, value);
+    }
+    #endregion SelectedFilter
+    #endregion CurrencyListFilter
+
+    #region constructor
+    public MainViewModel(LoadTradesService loadTradesService) {
+        LoadTradesService = loadTradesService;
+        this.PropertyChanged += MainViewModel_PropertyChanged;
+    }
+
+    private void MainViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
+        switch (e.PropertyName) {
+            case nameof(TradesList):
+                TradesView = TradesList;
+                CurrencyListFilter = TradesList.GroupBy(t => t.Currency).Select(g => g.Key).ToList();
+                break;
+            case nameof(TradesView):
+                break;
+        }
+    }
+    #endregion constructor
 
     public async Task LoadTrades() {
         BusyIndicatorVisibility = "Visible";
