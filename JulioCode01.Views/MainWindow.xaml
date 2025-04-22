@@ -31,17 +31,17 @@
                 <DataGridTextColumn  Binding="{Binding Currency}" MinWidth="100" Width="auto" >
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid MinWidth="100">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                                    <ColumnDefinition Width="Auto"  />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Currency"  Width="auto"/>
                                 <Expander Grid.Column="1" ExpandDirection="Right" >
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="WIP" Foreground="Red"></TextBlock>
+                                        <!--<TextBlock Text="WIP" Foreground="Red"></TextBlock>-->
                                         <ComboBox DataContext="{Binding ElementName=TradesGrid, Path=DataContext}" ItemsSource="{Binding CurrencyListFilter}"
-                                                  SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="."
+                                                  SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="." Margin="4,0"
                                             />
                                     </StackPanel>
                                 </Expander>
