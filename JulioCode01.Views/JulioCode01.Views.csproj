@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\CIBC logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
   </ItemGroup>
 
@@ -16,6 +20,12 @@
     <ProjectReference Include="..\JulioCode.Common\JulioCode12.Common.csproj" />
     <ProjectReference Include="..\JulioCode.Models\JulioCode09.Models.csproj" />
     <ProjectReference Include="..\JulioCode.ViewModels\JulioCode06.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\CIBC logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

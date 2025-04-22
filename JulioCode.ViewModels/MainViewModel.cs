@@ -55,6 +55,14 @@ public class MainViewModel : SetPropertyBase {
     #endregion SelectedFilter
     #endregion CurrencyListFilter
 
+    #region IsLoading
+    private bool _isLoading;
+    public bool IsLoading {
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
+    }
+    #endregion IsLoading
+
     #region constructor
     public MainViewModel(LoadTradesService loadTradesService) {
         LoadTradesService = loadTradesService;
@@ -80,7 +88,11 @@ public class MainViewModel : SetPropertyBase {
 
     public async Task LoadTrades() {
         BusyIndicatorVisibility = "Visible";
+        IsLoading = true;
+        _tradesList = null;
+        RaisePropertyChanged(nameof(TradesList));
         TradesList = await LoadTradesService.GetTradesAsync();
+        IsLoading = false;
         BusyIndicatorVisibility = "Collapsed";
 
         return;

@@ -8,13 +8,18 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:BooleanToStringConverter x:Key="BooleanToStringConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="152*"/>
-            <RowDefinition Height="33"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Button Content="Load trades" Command="{Binding LoadTradeCommand}" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Center"/>
+        <Button Content="Load trades" Command="{Binding LoadTradeCommand}" 
+                IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanToStringConverter}, ConverterParameter=False|True }"
+                HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Center"/>
         <ComboBox Grid.Row="0" Text="Currency filter" ItemsSource="{Binding CurrencyListFilter}" 
                   SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="."
                   HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" />
@@ -48,6 +53,8 @@
                 <DataGridTextColumn Header="Maturity Date" Binding="{Binding MaturityDate, StringFormat={}{0:yyyy-mm-dd}}" MinWidth="100" Width="auto"  />
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Grid.Row="1" Text="Is Busy" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding BusyIndicatorVisibility}" />
+        <!--<TextBlock Grid.Row="1" Text="Is Busy" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding BusyIndicatorVisibility}" />-->
+        <Image Source="/JulioCode01.Views;component/Images/CIBC logo.png" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Visibility="{Binding IsLoading
+            , Converter={StaticResource BooleanToStringConverter}, ConverterParameter=Visible|Collapsed }" />
     </Grid>
 </Window>
