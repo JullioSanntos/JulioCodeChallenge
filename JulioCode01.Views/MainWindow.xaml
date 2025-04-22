@@ -13,17 +13,19 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="35*"/>
+            <RowDefinition Height="50"/> <!--Load Trades button-->
+            <RowDefinition Height="100*"/> <!--DataGrid and Busy Indicator-->
+            <RowDefinition Height="Auto"/> <!--GridSplitter-->
+            <RowDefinition Height="35*"/> <!--Invalid Trades-->
         </Grid.RowDefinitions>
+       
+        <!--#region Grid.Row=0 Load Trades button-->
         <Button Content="Load trades" Command="{Binding LoadTradeCommand}" 
                 IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanToStringConverter}, ConverterParameter=False|True }"
                 HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Center"/>
-        <!--<ComboBox Grid.Row="0" Text="Currency filter" ItemsSource="{Binding CurrencyListFilter}" 
-                  SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="."
-                  HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" />-->
+        <!--#endregion Grid.Row=0 Load Trades button-->
+
+        <!--#region Grid.Row=1 DataGrid and Busy indicator-->
         <DataGrid x:Name="TradesGrid" Grid.Row="1" ItemsSource="{Binding TradesView}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="TradeId" Binding="{Binding TradeId}" MinWidth="100" Width="auto"/>
@@ -42,13 +44,13 @@
                                         IsEnabled="{Binding HasTrades}" Height="22" BorderThickness="0"/>
                             </Grid>
                         </DataTemplate>
-
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='{}{0:c}'}" MinWidth="100" Width="auto"  />
                 <DataGridTextColumn Header="Maturity Date" Binding="{Binding MaturityDate, StringFormat={}{0:yyyy-mm-dd}}" MinWidth="100" Width="auto"  />
             </DataGrid.Columns>
         </DataGrid>
+
         <Image x:Name="BusyIndicator" Source="/JulioCode01.Views;component/Images/CIBC logo transparent.png" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Visibility="{Binding IsLoading
             , Converter={StaticResource BooleanToStringConverter}, ConverterParameter=Visible|Collapsed }" RenderTransformOrigin="0.5, 0.5" >
             <Image.RenderTransform>
@@ -67,33 +69,22 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>
+        <!--#endregion Grid.Row=1-->
+
+        <!--#region Grid.Row=2 GridSplitter-->
         <GridSplitter Grid.Row="2" Height="4"  HorizontalAlignment="Stretch" ResizeDirection="Rows"
                       Background="DarkBlue" ShowsPreview="True"></GridSplitter>
-        <ListBox Grid.Row="3" ItemsSource="{Binding InvalidTrades}" >
+        <!--#endregion Grid.Row=2  GridSplitter-->
+
+        <!--#region Grid.Row=3 InvalidTrades-->
+        <ListBox Grid.Row="3" ItemsSource="{Binding c}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=.}" Foreground="IndianRed" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <!--#endregion Grid.Row=3 InvalidTrades-->
+
     </Grid>
 </Window>
-<!--<DataGridTextColumn.HeaderTemplate>
-    <DataTemplate>
-        <Grid MinWidth="100">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"  />
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Currency"  Width="auto"/>
-            <Expander Grid.Column="1" ExpandDirection="Right" >
-                <StackPanel Orientation="Vertical">
-                    <ComboBox DataContext="{Binding ElementName=TradesGrid, Path=DataContext}" ItemsSource="{Binding CurrencyListFilter}"
-                              SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="." Margin="4,0"
-                    />
-                </StackPanel>
-            </Expander>
-        </Grid>
-    </DataTemplate>
-
-</DataGridTextColumn.HeaderTemplate>-->
