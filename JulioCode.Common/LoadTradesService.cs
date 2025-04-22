@@ -10,7 +10,8 @@ namespace JulioCode12.Common;
 public class LoadTradesService {
     public async Task<List<Trade>> GetTradesAsync(int minTransactions = 20, int maxTransactions = 40) {
 
-        await Task.Delay(1500);
+        var randomDelay = new Random();
+        await Task.Delay(randomDelay.Next(1500,3500));
         var tradeList = await Task.Run(() => GetRandomNumberOfTradesAsync(minTransactions, maxTransactions));
 
         return tradeList;

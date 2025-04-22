@@ -61,7 +61,7 @@
                             <DoubleAnimation Storyboard.TargetName="BusyIndicator" 
                                              Storyboard.TargetProperty="(Button.RenderTransform).(RotateTransform.Angle)" 
                                              From="0" To="360" 
-                                             Duration="0:0:5" BeginTime="0:0:0"/>
+                                             Duration="0:0:2" BeginTime="0:0:0"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
