@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Windows.Input;
 using JulioCode12.Common;
@@ -63,6 +64,14 @@ public class MainViewModel : SetPropertyBase {
     }
     #endregion IsLoading
 
+    #region InvalidTrades
+    private ObservableCollection<string> _invalidTrades;
+    public ObservableCollection<string> InvalidTrades {
+        get => _invalidTrades;
+        set => SetProperty(ref _invalidTrades, value);
+    }
+    #endregion InvalidTrades
+
     #region constructor
     public MainViewModel(LoadTradesService loadTradesService) {
         LoadTradesService = loadTradesService;
@@ -74,6 +83,9 @@ public class MainViewModel : SetPropertyBase {
             case nameof(TradesList):
                 TradesView = TradesList;
                 CurrencyListFilter = TradesList.GroupBy(t => t.Currency).Select(g => g.Key).ToList();
+                InvalidTrades = new ObservableCollection<string>(
+                    TradesList.Where(t => t.IsValid == false).Select(t => t.InvalidTrades).ToList()
+                    );
 
                 break;
             case nameof(SelectedFilter):

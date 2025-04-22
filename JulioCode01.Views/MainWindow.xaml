@@ -72,19 +72,14 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>
+
+        <ListBox Grid.Row="2" ItemsSource="{Binding InvalidTrades}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=.}" Foreground="IndianRed" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
-<!--<DoubleAnimation Storyboard.TargetName="BusyIndicator" 
-                 Storyboard.TargetProperty="Width" From="50" To="150" 
-                 Duration="0:0:1" BeginTime="0:0:0"/>
--->
-<!--<DoubleAnimation Storyboard.TargetName="BusyIndicator" 
-                 Storyboard.TargetProperty="Height" From="1" To="250" 
-                 Duration="0:0:1" BeginTime="0:0:1"/>
-<DoubleAnimation Storyboard.TargetName="BusyIndicator" 
-                 Storyboard.TargetProperty="Height" From="250" 
-                 To="1" Duration="0:0:1" BeginTime="0:0:2"/>-->
-<!--
-<DoubleAnimation Storyboard.TargetName="BusyIndicator" 
-                 Storyboard.TargetProperty="Width" From="150" To="50" 
-                 Duration="0:0:1" BeginTime="0:0:1"/>-->
+
