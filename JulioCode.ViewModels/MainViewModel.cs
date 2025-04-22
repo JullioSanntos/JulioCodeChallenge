@@ -39,9 +39,14 @@ public class MainViewModel : SetPropertyBase {
     private List<string>? _currencyListFilter = new List<string>();
     public List<string> CurrencyListFilter {
         get => _currencyListFilter!;
-        set => SetProperty(ref _currencyListFilter, value);
+        set {
+            value.Insert(0, SelectionCleared);
+            SetProperty(ref _currencyListFilter, value);
+        }
     }
-    #region c
+
+    #region SelectedFilter
+    const string SelectionCleared = "--- clear ---";
     private string _selectedFilter = string.Empty;
     public string SelectedFilter {
         get => _selectedFilter!;
@@ -63,7 +68,11 @@ public class MainViewModel : SetPropertyBase {
                 CurrencyListFilter = TradesList.GroupBy(t => t.Currency).Select(g => g.Key).ToList();
 
                 break;
-            case nameof(TradesView):
+            case nameof(SelectedFilter):
+                if (SelectedFilter != SelectionCleared) {
+                    TradesView = TradesList.Where(t => t.Currency == SelectedFilter).ToList();
+                }
+                else { TradesView = TradesList; }
                 break;
         }
     }

@@ -32,7 +32,12 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Header" MinWidth="100" Width="auto"/>
                                 <Expander Grid.Column="1" ExpandDirection="Down" >
-                                    <ComboBox ItemsSource="{Binding ElementName=TradesGrid, Path=DataContext.CurrencyListFilter}" />
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="WIP" Foreground="Red"></TextBlock>
+                                        <ComboBox DataContext="{Binding ElementName=TradesGrid, Path=DataContext}" ItemsSource="{Binding CurrencyListFilter}"
+                                                  SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="."
+                                            />
+                                    </StackPanel>
                                 </Expander>
                             </Grid>
             
