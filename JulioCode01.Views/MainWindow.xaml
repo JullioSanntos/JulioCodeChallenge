@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="100*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="35*"/>
         </Grid.RowDefinitions>
         <Button Content="Load trades" Command="{Binding LoadTradeCommand}" 
@@ -32,11 +33,11 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Currency" MinWidth="100" Width="auto"/>
-                                <Expander Grid.Column="1" ExpandDirection="Down" >
+                                <Label Grid.Column="0" Content="Currency"  Width="auto"/>
+                                <Expander Grid.Column="1" ExpandDirection="Right" >
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="WIP" Foreground="Red"></TextBlock>
                                         <ComboBox DataContext="{Binding ElementName=TradesGrid, Path=DataContext}" ItemsSource="{Binding CurrencyListFilter}"
@@ -72,8 +73,9 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>
-
-        <ListBox Grid.Row="2" ItemsSource="{Binding InvalidTrades}" >
+        <GridSplitter Grid.Row="2" Height="4"  HorizontalAlignment="Stretch" ResizeDirection="Rows"
+                      Background="DarkBlue" ShowsPreview="True"></GridSplitter>
+        <ListBox Grid.Row="3" ItemsSource="{Binding InvalidTrades}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=.}" Foreground="IndianRed" />
