@@ -7,9 +7,15 @@ using JulioCode12.Common.WPF;
 
 namespace JulioCode06.ViewModels; 
 public class MainViewModel : SetPropertyBase {
-    public ICommand LoadTradeCommand => new RelayCommand(async _ => await LoadTrades());
 
+    #region properties
+    #region LoadTradeCommand
+    public ICommand LoadTradeCommand => new RelayCommand(async _ => await LoadTrades());
+    #endregion LoadTradeCommand
+
+    #region LoadTradesService
     public LoadTradesService LoadTradesService { get; init; }
+    #endregion LoadTradesService
 
     #region BusyIndicatorVisibility
     private string _busyIndicatorVisibility = "Collapsed";
@@ -72,7 +78,13 @@ public class MainViewModel : SetPropertyBase {
     }
     #endregion InvalidTrades
 
-    #region constructor
+    #region HasTrades
+    public bool HasTrades => TradesList.Count != 0;
+    #endregion HasTrades
+
+    #endregion properties
+
+    #region constructors
     public MainViewModel(LoadTradesService loadTradesService) {
         LoadTradesService = loadTradesService;
         this.PropertyChanged += MainViewModel_PropertyChanged;
@@ -82,11 +94,12 @@ public class MainViewModel : SetPropertyBase {
         switch (e.PropertyName) {
             case nameof(TradesList):
                 TradesView = TradesList;
-                CurrencyListFilter = TradesList.GroupBy(t => t.Currency).Select(g => g.Key).ToList();
+                CurrencyListFilter = TradesList.GroupBy(t => t.Currency)
+                    .Select(g => g.Key).OrderBy(c => c).ToList();
                 InvalidTrades = new ObservableCollection<string>(
                     TradesList.Where(t => t.IsValid == false).Select(t => t.InvalidTrades).ToList()
                     );
-
+                RaisePropertyChanged(nameof(HasTrades));
                 break;
             case nameof(SelectedFilter):
                 if (SelectedFilter != SelectionCleared) {
@@ -96,8 +109,9 @@ public class MainViewModel : SetPropertyBase {
                 break;
         }
     }
-    #endregion constructor
+    #endregion constructors
 
+    #region methods
     public async Task LoadTrades() {
         BusyIndicatorVisibility = "Visible";
         IsLoading = true;
@@ -109,4 +123,6 @@ public class MainViewModel : SetPropertyBase {
 
         return;
     }
+    #endregion methods
+
 }
