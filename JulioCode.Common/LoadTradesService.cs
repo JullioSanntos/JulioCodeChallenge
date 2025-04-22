@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,8 +43,11 @@ public class LoadTradesService {
 
     public async Task<List<Trade>> PopulateTradesAsync(List<Trade> tradesList) {
         var tradeIdTask = PopulateTradeIdAsync(tradesList);
+        var typesTask = PopulateTypesAsync(tradesList);
         var currencyTask = PopulateCurrencyAsync(tradesList);
-        await Task.WhenAll(tradeIdTask, currencyTask);
+        var amountTask = PopulateAmountAsync(tradesList);
+        var maturityDateTask = PopulateMaturityDateAsync(tradesList);
+        await Task.WhenAll(tradeIdTask, typesTask, currencyTask, amountTask, maturityDateTask);
         return tradesList;
     }
 
@@ -60,6 +64,19 @@ public class LoadTradesService {
     }
     #endregion CurrenciesList
 
+    #region TypesArr
+    private string[]? _typesArr;
+    public string[] TypesArr {
+        get {
+            if (_typesArr != null) { return _typesArr; }
+                
+            _typesArr = [ "stocks", "bonds", "derivatives", "currencies" ];
+
+            return _typesArr;
+        }
+    }
+    #endregion TypesArr
+
 
 
     public async Task<List<Trade>> PopulateTradeIdAsync(List<Trade> tradesList) {
@@ -69,10 +86,36 @@ public class LoadTradesService {
         return tradesList;
     }
 
+    public async Task<List<Trade>> PopulateTypesAsync(List<Trade> tradesList) {
+        var randomCurr = new Random();
+        foreach (var trade in tradesList) {
+            trade.Type = TypesArr[randomCurr.Next(TypesArr.Length - 1)];
+        }
+        return tradesList;
+    }
+
     public async Task<List<Trade>> PopulateCurrencyAsync(List<Trade> tradesList) {
         var randomCurr = new Random();
         foreach (var trade in tradesList) {
-            trade.Currency = CurrenciesList[randomCurr.Next(CurrenciesList.Count)];
+            trade.Currency = CurrenciesList[randomCurr.Next(CurrenciesList.Count - 1)];
+        }
+        return tradesList;
+    }
+
+    public async Task<List<Trade>> PopulateAmountAsync(List<Trade> tradesList) {
+        var randomCurr = new Random();
+        foreach (var trade in tradesList) {
+            trade.Amount = randomCurr.Next(100, 1000);
+        }
+        return tradesList;
+    }
+
+    public async Task<List<Trade>> PopulateMaturityDateAsync(List<Trade> tradesList) {
+        var randomCurr = new Random();
+        var startDate = DateTime.Now;
+        startDate = startDate.AddMonths(3);
+        foreach (var trade in tradesList) {
+            trade.MaturityDate = startDate.AddDays(randomCurr.Next(100, 1000));
         }
         return tradesList;
     }

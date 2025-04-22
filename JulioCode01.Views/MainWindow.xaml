@@ -45,7 +45,7 @@
 
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" MinWidth="100" Width="auto"  />
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='{}{0:c}'}" MinWidth="100" Width="auto"  />
                 <DataGridTextColumn Header="Maturity Date" Binding="{Binding MaturityDate, StringFormat={}{0:yyyy-mm-dd}}" MinWidth="100" Width="auto"  />
             </DataGrid.Columns>
         </DataGrid>
