@@ -30,7 +30,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Header" MinWidth="100" Width="auto"/>
+                                <Label Grid.Column="0" Content="Currency" MinWidth="100" Width="auto"/>
                                 <Expander Grid.Column="1" ExpandDirection="Down" >
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="WIP" Foreground="Red"></TextBlock>
@@ -40,7 +40,6 @@
                                     </StackPanel>
                                 </Expander>
                             </Grid>
-            
                         </DataTemplate>
 
                     </DataGridTextColumn.HeaderTemplate>
