@@ -12,6 +12,14 @@ namespace JulioCode01.Views {
             InitializeComponent();
             ViewModel = viewModel;
             this.DataContext = viewModel;
+            viewModel.PropertyChanged += ViewModel_PropertyChanged;
+        }
+
+        private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
+            switch (e.PropertyName) {
+                case nameof(ViewModel.IsLoading):
+                    break;
+            };
         }
 
         //https://stackoverflow.com/questions/24515852/using-adorner-to-show-stretched-overlay-containing-uielements
