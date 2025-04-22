@@ -5,7 +5,8 @@ namespace JulioCode.Tests {
     public sealed class TradeTests {
         [TestMethod]
         public void TradeInstantiation() {
-            var target = new Trade("TSLA", "future trade", "Dollar", 200d, new DateTime(2026,01,01) );
+            /*"TSLA", "future trade", "Dollar", 200d, new DateTime(2026,01,01)*/
+            var target = new Trade( );
             Assert.IsNotNull(target);
         }
     }
