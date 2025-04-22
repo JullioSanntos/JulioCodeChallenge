@@ -54,7 +54,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <!--<TextBlock Grid.Row="1" Text="Is Busy" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding BusyIndicatorVisibility}" />-->
-        <Image x:Name="BusyIndicator" Source="/JulioCode01.Views;component/Images/CIBC logo.png" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Visibility="{Binding IsLoading
+        <Image x:Name="BusyIndicator" Source="/JulioCode01.Views;component/Images/CIBC logo transparent.png" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Visibility="{Binding IsLoading
             , Converter={StaticResource BooleanToStringConverter}, ConverterParameter=Visible|Collapsed }" RenderTransformOrigin="0.5, 0.5" >
             <Image.RenderTransform>
                 <RotateTransform />

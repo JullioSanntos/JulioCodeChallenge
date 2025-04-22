@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\CIBC logo transparent.png" />
     <None Remove="Images\CIBC logo.png" />
   </ItemGroup>
 
@@ -24,6 +25,12 @@
 
   <ItemGroup>
     <Resource Include="Images\CIBC logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\CIBC logo transparent.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
