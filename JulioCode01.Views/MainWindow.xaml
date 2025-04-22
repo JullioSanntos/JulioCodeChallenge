@@ -77,7 +77,7 @@
         <!--#endregion Grid.Row=2  GridSplitter-->
 
         <!--#region Grid.Row=3 InvalidTrades-->
-        <ListBox Grid.Row="3" ItemsSource="{Binding c}" >
+        <ListBox Grid.Row="3" ItemsSource="{Binding InvalidTrades}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=.}" Foreground="IndianRed" />
