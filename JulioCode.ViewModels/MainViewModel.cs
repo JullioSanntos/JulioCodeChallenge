@@ -41,9 +41,9 @@ public class MainViewModel : SetPropertyBase {
         get => _currencyListFilter!;
         set => SetProperty(ref _currencyListFilter, value);
     }
-    #region SelectedFilter
-    private List<string>? _selectedFilter = new List<string>();
-    public List<string> SelectedFilter {
+    #region c
+    private string _selectedFilter = string.Empty;
+    public string SelectedFilter {
         get => _selectedFilter!;
         set => SetProperty(ref _selectedFilter, value);
     }

@@ -15,7 +15,9 @@
             <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
         <Button Content="Load trades" Command="{Binding LoadTradeCommand}" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Center"/>
-        <ComboBox Grid.Row="0" Text="Currency filter" ItemsSource="{Binding CurrencyListFilter}" HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" DisplayMemberPath="."/>
+        <ComboBox Grid.Row="0" Text="Currency filter" ItemsSource="{Binding CurrencyListFilter}" 
+                  SelectedValue="{Binding SelectedFilter }" DisplayMemberPath="."
+                  HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" />
         <DataGrid x:Name="TradesGrid" Grid.Row="1" ItemsSource="{Binding TradesView}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="TradeId" Binding="{Binding TradeId}" MinWidth="100" Width="auto"/>
@@ -29,7 +31,7 @@
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Header" MinWidth="100" Width="auto"/>
-                                <Expander Grid.Column="1" ExpandDirection="Down" Canvas.ZIndex="1000"  >
+                                <Expander Grid.Column="1" ExpandDirection="Down" >
                                     <ComboBox ItemsSource="{Binding ElementName=TradesGrid, Path=DataContext.CurrencyListFilter}" />
                                 </Expander>
                             </Grid>
