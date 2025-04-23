@@ -87,21 +87,21 @@ public class MainViewModel : SetPropertyBase {
     }
     #endregion IsLoading
 
-    #region InvalidTrades
-    private ObservableCollection<string> _invalidTrades = new ObservableCollection<string>();
-    public ObservableCollection<string> InvalidTrades {
+    #region InvalidTradeMessage
+    private ObservableCollection<Trade> _invalidTrades = new ObservableCollection<Trade>();
+    public ObservableCollection<Trade> InvalidTrades {
         get => _invalidTrades;
         set => SetProperty(ref _invalidTrades!, value);
     }
-    #endregion InvalidTrades
+    #endregion InvalidTradeMessage
 
     #region HasTrades
     public bool HasTrades => TradesList.Count != 0;
     #endregion HasTrades
 
     #region SelectedInvalidTrade
-    private string? _selectedInvalidTrade;
-    public string? SelectedInvalidTrade {
+    private Trade? _selectedInvalidTrade;
+    public Trade? SelectedInvalidTrade {
         get => _selectedInvalidTrade;
         set => SetProperty(ref _selectedInvalidTrade, value);
     }
@@ -121,9 +121,7 @@ public class MainViewModel : SetPropertyBase {
                 TradesView = TradesList;
                 CurrencyListFilter = TradesList.GroupBy(t => t.Currency)
                     .Select(g => g.Key).OrderBy(c => c).ToList();
-                InvalidTrades = new ObservableCollection<string>(
-                    TradesList.Where(t => t.IsValid == false).Select(t => t.InvalidTrades).ToList()
-                    );
+
                 RaisePropertyChanged(nameof(HasTrades));
                 break;
             case nameof(SelectedFilter):
@@ -131,6 +129,14 @@ public class MainViewModel : SetPropertyBase {
                     TradesView = TradesList.Where(t => t.Currency == SelectedFilter).ToList();
                 }
                 else { TradesView = TradesList; }
+                break;
+            case (nameof(TradesView)):
+                InvalidTrades = new ObservableCollection<Trade>(
+                    TradesView.Where(t => t.IsValid == false).Select(tr => tr).ToList<Trade>()
+                );
+                break;
+            case nameof(SelectedInvalidTrade):
+                if (SelectedInvalidTrade != null) { SelectedTrade = SelectedInvalidTrade; }
                 break;
         }
     }

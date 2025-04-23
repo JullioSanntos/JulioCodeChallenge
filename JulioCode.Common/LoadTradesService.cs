@@ -110,7 +110,7 @@ public class LoadTradesService {
         var startDate = DateTime.Now;
         startDate = startDate.AddMonths(3);
         foreach (var trade in tradesList) {
-            trade.MaturityDate = startDate.AddDays(randomCurr.Next(100, 1000));
+            trade.MaturityDate = startDate.AddDays(randomCurr.Next(-10, 100));
         }
         return tradesList;
     }

@@ -7,28 +7,50 @@ public class Trade {
     public double Amount { get; set; }
     public DateTime MaturityDate { get; set; }
 
-    public bool  HasInvalidAmount => Amount < 150d;
-    public bool  HasInvalidMaturityDate => MaturityDate > DateTime.Now.AddDays(10);
+    public bool  HasInvalidAmount => Amount < 350;
+    public bool  HasInvalidMaturityDate => MaturityDate < DateTime.Now.AddMonths(3);
 
-
-    private string? _invalidTrades = null;
-    public string InvalidTrades {
+    #region InvalidTradeMessage
+    private string? _invalidTradeMessage = null;
+    public string? InvalidTradeMessage {
         get {
-            if (_invalidTrades != null) { return _invalidTrades; }
+            if (_invalidTradeMessage != null) { return _invalidTradeMessage; }
 
-            if (HasInvalidAmount && HasInvalidMaturityDate) {
-                _invalidTrades = $@"Trade ""{TradeId}"" has invalid Amount {Amount} and invalid Maturity date {MaturityDate}";
-            }
-            else if (HasInvalidAmount) {
-                _invalidTrades = @$"Trade ""{TradeId}"" has invalid Amount {Amount}";
-            }
-            else if (HasInvalidMaturityDate) {
-                _invalidTrades = @$"Trade ""{TradeId}"" has invalid Maturity date {MaturityDate}";
+            switch ((HasInvalidAmount, HasInvalidMaturityDate)) {
+                case (true, true):
+                    _invalidTradeMessage = @$"Trade ""{TradeId}"" has invalid Amount {Amount} and invalid Maturity date {MaturityDate}";
+                    break;
+                case (true, false):
+                    _invalidTradeMessage = @$"Trade ""{TradeId}"" has invalid Amount {Amount}";
+                    break;
+                case (false, true):
+                    _invalidTradeMessage = @$"Trade ""{TradeId}"" has invalid Maturity date {MaturityDate}";
+                    break;
+                default:
+                    _invalidTradeMessage = String.Empty;
+                    break;
             }
 
-            return _invalidTrades!;
+            //if (HasInvalidAmount && HasInvalidMaturityDate) {
+            //    _invalidTradeMessage = $@"Trade ""{TradeId}"" has invalid Amount {Amount} and invalid Maturity date {MaturityDate}";
+            //}
+            //else if (HasInvalidAmount) {
+            //    _invalidTradeMessage = @$"Trade ""{TradeId}"" has invalid Amount {Amount}";
+            //}
+            //else if (HasInvalidMaturityDate) {
+            //    _invalidTradeMessage = @$"Trade ""{TradeId}"" has invalid Maturity date {MaturityDate}";
+            //}
+            //else { _invalidTradeMessage = String.Empty; }
+
+            return _invalidTradeMessage!;
         }
     }
+    #endregion InvalidTradeMessage
 
-    public bool IsValid => InvalidTrades.Any() == false;
+    public bool IsValid {
+        get {
+            var noInvalidMessage = string.IsNullOrEmpty(InvalidTradeMessage);
+            return noInvalidMessage;
+        }
+    }
 }

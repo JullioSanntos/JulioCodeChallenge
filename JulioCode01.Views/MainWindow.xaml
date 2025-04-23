@@ -82,7 +82,7 @@
                  SelectedItem="{Binding SelectedInvalidTrade}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=.}" Foreground="IndianRed" />
+                    <TextBlock Text="{Binding Path= InvalidTradeMessage}" Foreground="IndianRed" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
