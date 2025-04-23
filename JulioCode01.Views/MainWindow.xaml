@@ -26,7 +26,8 @@
         <!--#endregion Grid.Row=0 Load Trades button-->
 
         <!--#region Grid.Row=1 DataGrid and Busy indicator-->
-        <DataGrid x:Name="TradesGrid" Grid.Row="1" ItemsSource="{Binding TradesView}" AutoGenerateColumns="False" >
+        <DataGrid x:Name="TradesGrid" Grid.Row="1" ItemsSource="{Binding TradesView}" 
+            SelectedItem="{Binding SelectedTrade}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="TradeId" Binding="{Binding TradeId}" MinWidth="100" Width="auto"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100" Width="auto"/>
@@ -77,7 +78,8 @@
         <!--#endregion Grid.Row=2  GridSplitter-->
 
         <!--#region Grid.Row=3 InvalidTrades-->
-        <ListBox Grid.Row="3" ItemsSource="{Binding InvalidTrades}" >
+        <ListBox Grid.Row="3" ItemsSource="{Binding InvalidTrades}"
+                 SelectedItem="{Binding SelectedInvalidTrade}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=.}" Foreground="IndianRed" />

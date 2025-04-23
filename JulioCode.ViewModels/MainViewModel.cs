@@ -33,14 +33,31 @@ public class MainViewModel : SetPropertyBase {
     }
     #endregion TradesList
 
-    #region TradesList
+    #region TradesView
     private List<Trade>? _tradesView;
 
     public List<Trade> TradesView {
         get { return _tradesView ??= []; }
         set => SetProperty(ref _tradesView, value);
     }
-    #endregion TradesList
+    #endregion TradesView
+
+    #region SelectedTrade
+    private Trade? _selectedTrade;
+    public Trade? SelectedTrade {
+        get => _selectedTrade;
+        set => SetProperty(ref _selectedTrade, value);
+    }
+    #endregion SelectedTrade
+
+    #region RowIndexTradeIdDict
+    private Dictionary<string, int>? _rowIndexTradeIdDict;
+    public Dictionary<string, int> RowIndexTradeIdDict
+    {
+        get { return _rowIndexTradeIdDict ??= new Dictionary<string, int>(); }
+        set => _rowIndexTradeIdDict = value;
+    }
+    #endregion RowIndexTradeIdDict
 
     #region CurrencyListFilter
     private List<string>? _currencyListFilter = new List<string>();
@@ -71,16 +88,24 @@ public class MainViewModel : SetPropertyBase {
     #endregion IsLoading
 
     #region InvalidTrades
-    private ObservableCollection<string> _invalidTrades;
+    private ObservableCollection<string> _invalidTrades = new ObservableCollection<string>();
     public ObservableCollection<string> InvalidTrades {
         get => _invalidTrades;
-        set => SetProperty(ref _invalidTrades, value);
+        set => SetProperty(ref _invalidTrades!, value);
     }
     #endregion InvalidTrades
 
     #region HasTrades
     public bool HasTrades => TradesList.Count != 0;
     #endregion HasTrades
+
+    #region SelectedInvalidTrade
+    private string? _selectedInvalidTrade;
+    public string? SelectedInvalidTrade {
+        get => _selectedInvalidTrade;
+        set => SetProperty(ref _selectedInvalidTrade, value);
+    }
+    #endregion SelectedInvalidTrade
 
     #endregion properties
 
