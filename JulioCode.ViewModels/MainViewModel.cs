@@ -50,15 +50,6 @@ public class MainViewModel : SetPropertyBase {
     }
     #endregion SelectedTrade
 
-    #region RowIndexTradeIdDict
-    private Dictionary<string, int>? _rowIndexTradeIdDict;
-    public Dictionary<string, int> RowIndexTradeIdDict
-    {
-        get { return _rowIndexTradeIdDict ??= new Dictionary<string, int>(); }
-        set => _rowIndexTradeIdDict = value;
-    }
-    #endregion RowIndexTradeIdDict
-
     #region CurrencyListFilter
     private List<string>? _currencyListFilter = new List<string>();
     public List<string> CurrencyListFilter {
