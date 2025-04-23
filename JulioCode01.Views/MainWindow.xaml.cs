@@ -27,7 +27,10 @@ namespace JulioCode01.Views {
 
         private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case nameof(ViewModel.IsLoading):
+                case nameof(ViewModel.SelectedInvalidTrade):
+                    if (ViewModel.SelectedInvalidTrade != null) {
+                        this.TradesGrid.ScrollIntoView(ViewModel.SelectedInvalidTrade);
+                    }
                     break;
             };
         }

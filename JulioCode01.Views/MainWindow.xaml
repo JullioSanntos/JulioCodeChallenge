@@ -27,7 +27,7 @@
 
         <!--#region Grid.Row=1 DataGrid and Busy indicator-->
         <DataGrid x:Name="TradesGrid" Grid.Row="1" ItemsSource="{Binding TradesView}" 
-            SelectedItem="{Binding SelectedTrade}" AutoGenerateColumns="False" >
+            SelectedItem="{Binding SelectedTrade}" IsReadOnly="True" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="TradeId" Binding="{Binding TradeId}" MinWidth="100" Width="auto"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100" Width="auto"/>
